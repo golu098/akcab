@@ -1,0 +1,57 @@
+/* Container below the carousel */
+.afterCarousel {
+    display: flex;
+    justify-content: space-between; /* Space between text and button */
+    align-items: center; /* Align text and button vertically */
+    padding: 1rem;
+    border-top: 1px solid #EEEEEE; /* Horizontal line above */
+    border-bottom: 1px solid #EEEEEE; /* Horizontal line below */
+    margin: 1rem 0;
+  }
+  
+  /* Text styles */
+  .afterCarousel h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .afterCarousel p {
+    font-size: 1rem;
+    color: #555;
+    margin-right: 7rem;
+    line-height: 1.5;
+  }
+  /* Button styles */
+.bookButton {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 0.3rem 2rem; /* Adjust padding for single-line text */
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Add transform for animation */
+    text-align: center; /* Ensure text is centered */
+  }
+  
+  /* Hover effect */
+  .bookButton:hover {
+    background-color: #e68900;
+    transform: scale(1.05); /* Slight zoom-in effect */
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .afterCarousel {
+      flex-direction: column; /* Stack text and button vertically */
+      align-items: center; /* Center align items */
+      text-align: center; /* Center align text */
+    }
+  
+    .bookButton {
+      margin-top: 1rem; /* Add space between text and button */
+      padding: 0.8rem 1.5rem; /* Adjust padding for smaller screens */
+    }
+  }
+  

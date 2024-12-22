@@ -1,0 +1,64 @@
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    padding: 1rem;
+    position: fixed; /* Ensure the navbar stays at the top */
+    top: 0;
+    left: 0;
+    width: calc(100% - 0rem); /* Full width minus 0.4rem space on the right */
+    z-index: 1000; /* Keep it above other elements like the carousel */
+  }
+  
+  .navbar .nav-links {
+    display: flex;
+    gap: 6rem;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+  
+  .navbar a:hover {
+    color: yellow;
+    transition: color 0.3s ease;
+  }
+  
+  /* Toggle button */
+  .navbar .toggle-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .navbar .nav-links {
+      display: none;
+      flex-direction: column;
+      background: #444;
+      position: absolute;
+      top: 60px; /* Position the dropdown below the navbar */
+      right: 0;
+      width: 200px;
+      padding: 1rem;
+      border-radius: 5px;
+      z-index: 1000; /* Ensure the dropdown stays on top */
+    }
+  
+    .navbar .nav-links.show {
+      display: flex;
+    }
+  
+    .navbar .toggle-btn {
+      display: block;
+    }
+  }
+  

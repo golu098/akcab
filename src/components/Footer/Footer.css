@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+
+
+
+.footer {
+  position: relative;
+  margin-top: 3rem;
+  padding: 3rem 1rem;
+  color: #fff;
+  background: #000;
+}
+
+.footer__columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer__col {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer__col-title {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.footer__col-title span {
+  margin-left: 1rem;
+}
+
+.footer a {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footer__copyrights {
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.footer__copyrights p {
+  display: flex;
+  justify-content: center;
+}
+
+.footer__copyrights p a {
+  margin-left: 0.5rem;
+}
+
+.footer__parralax {
+  position: absolute;
+  left: 0;
+  top: -300px;
+  height: 300px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.footer__parralax-trees,
+.footer__parralax-premierplan,
+.footer__parralax-secondplan {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat-x;
+  background-position-y: 100% !important;
+  animation: parralax 600s linear infinite;
+}
+
+.footer__parralax-moto {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  margin-left: -250px;
+  height: 200px;
+  width: 150px;
+  background: url('https://i.ibb.co/JCGfFJd/moto-net.gif') no-repeat;
+  transform-origin: 50% 80%;
+  animation: moto 5s linear infinite;
+}
+
+.footer__parralax-voiture {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  margin-left: 250px;
+  height: 114px;
+  width: 206px;
+  background: url('https://i.ibb.co/0Qhp4DN/voiture-fumee.gif') no-repeat;
+  animation: voiture 1s linear infinite;
+}
+
+.footer__parralax-trees {
+  background-image: url('https://i.ibb.co/nQM4PGJ/arbres.png');
+  bottom: -60px;
+  animation-duration: 1000s;
+}
+
+.footer__parralax-premierplan {
+  background-image: url('https://i.ibb.co/RQhDWbk/premierplanv3.png');
+  animation-duration: 500s;
+}
+
+.footer__parralax-secondplan {
+  background-image: url('https://i.ibb.co/J3TjC4W/second-plan.png');
+  animation-duration: 600s;
+}
+
+/* Keyframes for animations */
+@keyframes parralax {
+  0% {
+    background-position: 260px;
+  }
+  100% {
+    background-position: -10000vw;
+  }
+}
+
+@keyframes moto {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  5% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  25% {
+    transform: translateY(60px) rotate(-20deg);
+  }
+  49% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  51% {
+    transform: translateY(0) rotate(1deg);
+  }
+  75% {
+    transform: translateY(60px) rotate(20deg);
+  }
+  80% {
+    transform: translateY(60px) rotate(0deg);
+  }
+  98% {
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes voiture {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+/* Responsive Styles */
+
+/* Large Screens (Desktops) */
+@media (min-width: 1024px) {
+  .footer {
+    margin-top: 200px;
+  }
+
+  .footer__col {
+    flex: 1 1 45%;
+  }
+
+  .footer__parralax-moto {
+    margin-left: -200px;
+  }
+
+  .footer__parralax-voiture {
+    margin-left: 200px;
+  }
+}
+
+/* Medium Devices (Tablets) */
+@media (max-width: 1024px) {
+  .footer {
+    margin-top: 150px;
+    padding: 2rem 1rem;
+  }
+
+  .footer__columns {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__col {
+    flex: 1 1 100%;
+  }
+
+  .footer__col-title {
+    justify-content: center;
+  }
+
+  .footer__parralax-moto {
+    margin-left: -150px;
+  }
+
+  .footer__parralax-voiture {
+    margin-left: 150px;
+  }
+}
+
+/* Small Devices (Phones) */
+@media (max-width: 768px) {
+  .footer__parralax-moto,
+  .footer__parralax-voiture {
+    display: none;
+  }
+
+  .footer__parralax {
+    height: 200px;
+    top: -200px;
+  }
+
+  .footer {
+    margin-top: 100px;
+    padding: 1rem;
+  }
+
+  .footer__col-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer__parralax-trees {
+    background-image: url('https://i.ibb.co/nQM4PGJ/arbres.png');
+  }
+
+  .footer__parralax-premierplan {
+    background-image: url('https://i.ibb.co/RQhDWbk/premierplanv3.png');
+  }
+
+  .footer__parralax-secondplan {
+    background-image: url('https://i.ibb.co/J3TjC4W/second-plan.png');
+  }
+}
+
+/* Extra Small Devices (Very small phones) */
+@media (max-width: 480px) {
+  .footer__col-title {
+    font-size: 1.2rem;
+  }
+
+  .footer__copyrights p {
+    font-size: 0.8rem;
+  }
+}
+
