@@ -1,6 +1,8 @@
 import React from 'react';
 import "./DestinationCards.css";
+import { useNavigate } from 'react-router-dom';
 export default function DestinationCards() {
+    const navigate = useNavigate();
     const destinations = [
         {
           name: "Kolar",
@@ -35,16 +37,21 @@ export default function DestinationCards() {
       ];
   return (
     <div className="cards-container">
-    {destinations.map((destination, index) => (
-      <div className="card" key={index}>
-        <div className="card-img">
-          <img src={destination.img} alt={destination.name} />
+      {destinations.map((destination, index) => (
+        <div className="card" key={index}>
+          <div className="card-img">
+            <img src={destination.img} alt={destination.name} />
+          </div>
+          <h3 className="card-title">{destination.name}</h3>
+          <p className="card-text">{destination.description}</p>
+          <button
+            className="card-button"
+            onClick={() => navigate(`/details/${encodeURIComponent(destination.name)}`)}
+          >
+            Learn More
+          </button>
         </div>
-        <h3 className="card-title">{destination.name}</h3>
-        <p className="card-text">{destination.description}</p>
-        <button className="card-button">Explore More</button>
-      </div>
-    ))}
-  </div>
+      ))}
+    </div>
   )
 }

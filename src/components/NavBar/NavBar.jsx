@@ -6,6 +6,8 @@ import Home from "../../Pages/Home/Home";
 import Contact from "../../Pages/Contact/Contact";
 import Destination from "../../Pages/Destination/Destination";
 import About from "../../Pages/About/About";
+import DestinationCards from '../../Pages/Destination/DestinationCards';
+import DestinationDetails from '../../Pages/Destination/DestinationDetails';
 
 export default function NavBar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false); // State for toggle
@@ -37,6 +39,8 @@ export default function NavBar() {
           <Route path="/about" element={<About />} />
           <Route path="/destination" element={<Destination />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/" element={<DestinationCards />} />
+        <Route path="/details/:destinationName" element={<DestinationDetails/>} />
         </Routes>
       </div>
     </Router>
