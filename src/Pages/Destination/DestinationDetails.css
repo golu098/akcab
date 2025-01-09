@@ -1,55 +1,96 @@
-body {
-    margin: 0;
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    display: grid;
+    place-items: center;
+    
     min-height: 100vh;
-    display: grid;
-    place-content: center;
-    background: #A8DBA8;
   }
   
-  .gallery {
-    --s: 200px; /* control the size */
-    --g: 8px;   /* control the gap */
-    display: grid;
-    grid: auto-flow var(--s)/repeat(2,var(--s));
-    gap: var(--g);
+  ul {
+    display: flex;
+    width: calc(80% - 2rem);
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
   }
   
-  .gallery > img {
-    width: 100%; 
-    aspect-ratio: 1;
-    cursor: pointer;
-    filter: grayscale();
-    z-index: 0;
-    transition: .25s,z-index 0s .25s;
+  .icon-green {
+    color: green;
   }
   
-  .gallery > img:hover {
-    width: calc(200% + var(--g));
-    filter: grayscale(0);
+  li {
+    padding: 0;
+  }
+  
+  img {
+    max-width: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: all 0.2s ease;
+  }
+  
+  ul:is(:hover, :focus-within) img {
+    opacity: calc(0.1 + (var(--active-lerp, 0) * 0.9));
+    filter: grayscale(calc(1 - var(--active-lerp, 0)));
+  }
+  
+  :root {
+    --lerp-0: 1;
+    --lerp-1: 0.5787037;
+    --lerp-2: 0.2962963;
+    --lerp-3: 0.125;
+    --lerp-4: 0.037037;
+    --lerp-5: 0.0046296;
+    --lerp-6: 0;
+  }
+  
+  a {
+    outline-offset: 4px;
+  }
+  
+  li {
+    flex: calc(0.1 + (var(--active-lerp, 0) * 1));
+    transition: flex 0.2s ease;
+  }
+  
+  li:is(:hover, :focus-within) {
+    --active-lerp: var(--lerp-0);
+    z-index: 7;
+  }
+  li:has( + li:is(:hover, :focus-within)),
+  li:is(:hover, :focus-within) + li {
+    --active-lerp: var(--lerp-1);
+    z-index: 6;
+  }
+  li:has( + li + li:is(:hover, :focus-within)),
+  li:is(:hover, :focus-within) + li + li {
+    --active-lerp: var(--lerp-2);
+    z-index: 5;
+  }
+  li:has( + li + li + li:is(:hover, :focus-within)),
+  li:is(:hover, :focus-within) + li + li + li {
+    --active-lerp: var(--lerp-3);
+    z-index: 4;
+  }
+  li:has( + li + li + li + li:is(:hover, :focus-within)),
+  li:is(:hover, :focus-within) + li + li + li + li {
+    --active-lerp: var(--lerp-4);
+    z-index: 3;
+  }
+  li:has( + li + li + li + li + li:is(:hover, :focus-within)),
+  li:is(:hover, :focus-within) + li + li + li + li + li {
+    --active-lerp: var(--lerp-5);
+    z-index: 2;
+  }
+  li:has( + li + li + li + li + li + li:is(:hover, :focus-within)),
+  li:is(:hover, :focus-within) + li + li + li + li + li + li {
+    --active-lerp: var(--lerp-6);
     z-index: 1;
-    --_c: 50%;
-    transition: .4s,z-index 0s;
   }
   
-  .gallery > img:nth-child(1){
-    clip-path: circle(var(--_c,55% at 70% 70%));
-    place-self: start;
-  }
-  
-  .gallery > img:nth-child(2){
-    clip-path: circle(var(--_c,55% at 30% 70%));
-    place-self: start end;
-  }
-  
-  .gallery > img:nth-child(3){
-    clip-path: circle(var(--_c,55% at 70% 30%));
-    place-self: end start;
-  }
-  
-  .gallery > img:nth-child(4){
-    clip-path: circle(var(--_c,55% at 30% 30%));
-    place-self: end;
-  }
   
   .details-container {
     font-family: Arial, sans-serif;
@@ -141,5 +182,66 @@ body {
     width: 80%;
     height: 450px;
     border: 0;
+  }
+  /* DestinationDetails.css */
+.destination-details {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .destination-details h1 {
+    text-align: center;
+    color: #2c3e50;
+  }
+  
+  .destination-details p {
+    text-align: justify;
+  }
+  
+  .feedback-section {
+    margin-top: 20px;
+  }
+  
+  .feedback-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+  }
+  
+  .feedback-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .feedback-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .feedback-name {
+    margin: 0;
+    font-size: 18px;
+    color: #34495e;
+  }
+  
+  .feedback-rating {
+    color: #f39c12;
+    font-size: 14px;
+  }
+  
+  .star {
+    margin-right: 2px;
+  }
+  
+  .feedback-comment {
+    margin-top: 10px;
+    font-size: 16px;
   }
   

@@ -43,7 +43,8 @@ const Contact = () => {
     <div style={{ paddingBottom: "600px" }}> {/* Add sufficient padding */}
   {/* Main content */}
 </div>
-      <Footer/>
+<div> <Footer/></div>
+     
     </>
   );
 };

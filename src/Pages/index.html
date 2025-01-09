@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Rental System</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="scripts.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Car Rental System</h1>
+    </header>
+
+    <main>
+      <section id="car-list">
+        <h2>Available Cars</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Make</th>
+              <th>Model</th>
+              <th>Year</th>
+              <th>Rent</th>
+            </tr>
+          </thead>
+          <tbody id="carTableBody">
+            <!-- Cars will be dynamically loaded here -->
+          </tbody>
+        </table>
+      </section>
+
+      <section id="rented-cars">
+        <h2>Rented Cars</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Make</th>
+              <th>Model</th>
+              <th>Year</th>
+              <th>Renter</th>
+              <th>Return Date</th>
+            </tr>
+          </thead>
+          <tbody id="rentedCarsTableBody">
+            <!-- Rented cars will be displayed here -->
+          </tbody>
+        </table>
+      </section>
+
+      <section id="add-car">
+        <h2>Add a New Car</h2>
+        <form id="addCarForm">
+          <input type="text" id="make" placeholder="Make" required />
+          <input type="text" id="model" placeholder="Model" required />
+          <input type="number" id="year" placeholder="Year" required />
+          <button type="submit">Add Car</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Car Rental System</p>
+    </footer>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      header {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+      }
+
+      main {
+        padding: 1rem;
+      }
+
+      #car-list table,
+      #rented-cars table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+      }
+
+      #car-list table th,
+      #car-list table td,
+      #rented-cars table th,
+      #rented-cars table td {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        text-align: left;
+      }
+
+      #car-list table th,
+      #rented-cars table th {
+        background-color: #f4f4f4;
+      }
+
+      #add-car form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        max-width: 400px;
+      }
+
+      #add-car form input {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      #add-car form button {
+        padding: 0.5rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      #add-car form button:hover {
+        background-color: #0056b3;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1rem 0;
+        background-color: #f4f4f4;
+      }
+
+      #rental-form {
+        display: none;
+        max-width: 400px;
+        margin: 1rem auto;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+      }
+
+      #rental-form input {
+        width: 100%;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      #rental-form button {
+        width: 100%;
+        padding: 0.5rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      #rental-form button:hover {
+        background-color: #0056b3;
+      }
+
+      .success-message {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 1000;
+      }
+
+      .success-message .checkmark {
+        font-size: 48px;
+        margin-bottom: 10px;
+      }
+    </style>
+
+    <div id="rental-form">
+      <h2>Rent a Car</h2>
+      <form id="rentForm">
+        <input type="text" id="renterName" placeholder="Your Name" required />
+        <input
+          type="email"
+          id="renterEmail"
+          placeholder="Your Email"
+          required
+        />
+        <input
+          type="text"
+          id="aadharNumber"
+          placeholder="Aadhar Card Number"
+          pattern="[0-9]{12}"
+          required
+        />
+        <input type="date" id="returnDate" placeholder="Return Date" required />
+        <button type="submit">Confirm Rental</button>
+      </form>
+    </div>
+
+    <div id="successMessage" class="success-message">
+      <div class="checkmark">✓</div>
+      <p>Car rental confirmed successfully!</p>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const carTableBody = document.getElementById("carTableBody");
+        const rentedCarsTableBody = document.getElementById("rentedCarsTableBody");
+        const addCarForm = document.getElementById("addCarForm");
+        const rentalForm = document.getElementById("rental-form");
+        const rentForm = document.getElementById("rentForm");
+        const successMessage = document.getElementById("successMessage");
+
+        const cars = [];
+        const rentedCars = [];
+
+        let selectedCarId = null;
+
+        function renderCars() {
+          carTableBody.innerHTML = "";
+          cars.forEach((car) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                        <td>${car.id}</td>
+                        <td>${car.make}</td>
+                        <td>${car.model}</td>
+                        <td>${car.year}</td>
+                        <td><button data-id="${car.id}" class="rent-btn">Rent</button></td>
+                    `;
+            carTableBody.appendChild(row);
+          });
+          attachRentHandlers();
+        }
+
+        function renderRentedCars() {
+          rentedCarsTableBody.innerHTML = "";
+          rentedCars.forEach((rental) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                        <td>${rental.car.id}</td>
+                        <td>${rental.car.make}</td>
+                        <td>${rental.car.model}</td>
+                        <td>${rental.car.year}</td>
+                        <td>${rental.renterName}</td>
+                        <td>${rental.returnDate}</td>
+                    `;
+            rentedCarsTableBody.appendChild(row);
+          });
+        }
+
+        function attachRentHandlers() {
+          const rentButtons = document.querySelectorAll(".rent-btn");
+          rentButtons.forEach((button) => {
+            button.addEventListener("click", (event) => {
+              selectedCarId = parseInt(event.target.dataset.id, 10);
+              showRentalForm();
+            });
+          });
+        }
+
+        function showRentalForm() {
+          rentalForm.style.display = "block";
+        }
+
+        function hideRentalForm() {
+          rentalForm.style.display = "none";
+        }
+
+        function showSuccessMessage() {
+          successMessage.style.display = "block";
+          setTimeout(() => {
+            successMessage.style.display = "none";
+          }, 3000);
+        }
+
+        rentForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const renterName = document.getElementById("renterName").value;
+          const renterEmail = document.getElementById("renterEmail").value;
+          const aadharNumber = document.getElementById("aadharNumber").value;
+          const returnDate = document.getElementById("returnDate").value;
+
+          const carIndex = cars.findIndex((car) => car.id === selectedCarId);
+          if (carIndex !== -1) {
+            const rentedCar = cars.splice(carIndex, 1)[0]; // Remove the car from available cars
+            rentedCars.push({
+              car: rentedCar,
+              renterName,
+              renterEmail,
+              aadharNumber,
+              returnDate
+            });
+          }
+
+          hideRentalForm();
+          showSuccessMessage();
+          renderCars();
+          renderRentedCars();
+          rentForm.reset();
+        });
+
+        addCarForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const make = document.getElementById("make").value;
+          const model = document.getElementById("model").value;
+          const year = parseInt(document.getElementById("year").value, 10);
+
+          const newCar = {
+            id: cars.length + 1,
+            make,
+            model,
+            year,
+          };
+
+          cars.push(newCar);
+          renderCars();
+
+          addCarForm.reset();
+        });
+
+        renderCars();
+        renderRentedCars();
+      });
+    </script>
+  </body>
+</html>
