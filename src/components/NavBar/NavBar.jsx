@@ -21,7 +21,7 @@ export default function NavBar() {
       <div>
         {/* Navbar */}
         <nav className="navbar">
-          <Link to="/" className="logo">Test</Link>
+          <Link to="/" className="logo">LOGO</Link>
           <button className="toggle-btn" onClick={toggleMenu}>
             ☰
           </button>
